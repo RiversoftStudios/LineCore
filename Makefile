@@ -11,7 +11,7 @@ all:
 
 system: system-essentials
 
-system-essentials: sysroot/opt/systemdata/LineKernel.gz sysroot/opt/systemdata/clineb.a
+system-essentials: sysroot/opt/systemdata/LineKernel.gz sysroot/opt/systemdata/CLineB.a
 
 sysroot/opt/systemdata/LineKernel.gz:
 	# GENERATE THIS WITH: `make kernelconfig`
@@ -19,9 +19,9 @@ sysroot/opt/systemdata/LineKernel.gz:
 	cd LineKernel; make ARCH=$(ARCH)
 	cp LineKernel/LineKernel.gz sysroot/opt/systemdata/LineKernel.gz
 
-sysroot/opt/systemdata/clineb.a:
+sysroot/opt/systemdata/CLineB.a:
 	cd CLineB; make ARCH=$(ARCH) LINEKERNEL_PATH=../LineKernel/
-	cp CLineB/clineb.a sysroot/opt/systemdata/clineb.a
+	cp CLineB/clineb.a sysroot/opt/systemdata/CLineB.a
 
 arch-%:
 	echo $* > arch.txt
