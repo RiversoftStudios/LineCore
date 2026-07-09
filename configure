@@ -59,7 +59,7 @@ bincheckfor()
 	fi
 }
 
-bincheckfor sed SED
+bincheckfor sed SED || exit 1
 
 addin()
 {
