@@ -9,13 +9,13 @@ system: system-essentials
 system-essentials: sysroot/opt/systemdata/LineKernel.gz sysroot/opt/systemdata/CLineB.a
 
 sysroot/opt/systemdata/LineKernel.gz: sysroot/
-	# GENERATE THIS WITH: `make kernelconfig`
-	make LineKernel/.config
-	cd LineKernel; make ARCH=$(ARCH)
+	# GENERATE THIS WITH: `$(MAKE) kernelconfig`
+	$(MAKE) LineKernel/.config
+	cd LineKernel; $(MAKE) ARCH=$(ARCH)
 	cp LineKernel/LineKernel.gz sysroot/opt/systemdata/LineKernel.gz
 
 sysroot/opt/systemdata/CLineB.a: sysroot/
-	cd CLineB; make ARCH=$(ARCH) LINEKERNEL_PATH=../LineKernel/
+	cd CLineB; $(MAKE) ARCH=$(ARCH) LINEKERNEL_PATH=../LineKernel/
 	cp CLineB/CLineB.a sysroot/opt/systemdata/CLineB.a
 
 sysroot/:
@@ -23,11 +23,11 @@ sysroot/:
 
 kernelconfig: kernel$(KERNELCONFIG)config
 kernel%config:
-	cd LineKernel; make $*config ARCH=$(ARCH)
+	cd LineKernel; $(MAKE) $*config ARCH=$(ARCH)
 
 clean:
-	cd LineKernel; make distclean ARCH=$(ARCH)
-	cd CLineB; make clean ARCH=$(ARCH)
+	cd LineKernel; $(MAKE) distclean ARCH=$(ARCH)
+	cd CLineB; $(MAKE) clean ARCH=$(ARCH)
 	rm -r sysroot
 
 distclean: clean
