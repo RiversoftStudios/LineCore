@@ -1,0 +1,7 @@
+First you need to use configure. Run `./configure --arches` to see the available arches.
+You can then you `./configure --arch [ARCH]` to configure LineCore for your arch.
+
+Then, run `make kernelconfig`.
+Or optionally run `make kerneldefconfig` if you don't want to modify the config.
+
+Finally you can `make`
