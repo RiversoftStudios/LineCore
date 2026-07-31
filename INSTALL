@@ -7,4 +7,4 @@ Or optionally run `make kerneldefconfig` if you don't want to modify the config.
 Finally you can `make`
 
 SPDX-License-Identifier: CC0-1.0
-SPDX-FileCopyrightText: Copyright (C) 2026 River Games
+SPDX-FileCopyrightText: Copyright (C) 2026 Riversoft Studios
