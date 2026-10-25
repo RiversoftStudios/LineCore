@@ -30,14 +30,12 @@ while [[ $# -gt 0 ]]; do
 	esac
 done
 
-generated_files=""
-
 if [ "x$arch" == "x" ]; then
 	echo "No arch specified, see --help"
 	exit 1;
 fi
 
-cat LineArch/$arch.sh 2> /dev/null || { echo "No such arch, see --arches"; exit 1; }
+cat LineArch/$arch.sh &> /dev/null || { echo "No such arch, see --arches"; exit 1; }
 
 . LineArch/$arch.sh
 
@@ -65,7 +63,6 @@ bincheckfor sed SED || exit 1
 addin()
 {
 	cp $1.in $1
-	generated_files="$generated_files $1"
 	echo "Creating $1..."
 }
 
@@ -74,11 +71,9 @@ replacein()
 	$SED -i "s|@ARCH@|$arch|g" $1
 	$SED -i "s|@CC@|$CC|g" $1
 	$SED -i "s|@AS@|$AS|g" $1
-	$SED -i "s|@AR@|$AR|g" $1
 }
 
-bincheckfor ${CCPREFIX}gcc CC || exit 1
-bincheckfor ${CCPREFIX}ar AR || exit 1
-bincheckfor ${CCPREFIX}as AS || exit 1
+bincheckfor ${ARCH_TARGET}-gcc CC || exit 1
+bincheckfor ${ARCH_TARGET}-as AS || exit 1
 addin Makefile
 replacein Makefile

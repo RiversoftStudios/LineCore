@@ -4,7 +4,8 @@
 KERNELCONFIG ?= ask
 ARCH = @ARCH@
 
-system: system-essentials
+system:
+	$(MAKE) system-essentials
 
 system-essentials: sysroot/opt/systemdata/LineKernel.gz sysroot/opt/systemdata/CLineB.a
 
